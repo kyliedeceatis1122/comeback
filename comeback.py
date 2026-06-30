@@ -9,7 +9,7 @@ Features:
 - Stats (/stats)
 - Add/edit products from bot (/addproduct)
 """
-
+import os
 import logging
 import sqlite3
 from datetime import datetime, timezone, timedelta
@@ -24,9 +24,9 @@ from telegram.ext import (
 # ═══════════════════════════════════════════════════════════════
 #  CONFIG — edit these
 # ═══════════════════════════════════════════════════════════════
-BOT_TOKEN    = "8863197109:AAHyPGDMXjmiXUQfb-ePB3Ty1BD8LDXKreQ"
-ADMIN_IDS    = [8249985938]           # your Telegram user ID
-BOT_USERNAME = "@Sjsjksmn_nbot"           # your bot username
+BOT_TOKEN    = os.environ["BOT_TOKEN"]
+ADMIN_IDS    = [8224408123]           # your Telegram user ID
+BOT_USERNAME = os.environ["BOT_USERNAME"]           # your bot username
 
 # ═══════════════════════════════════════════════════════════════
 #  PRODUCTS — add as many as you want
