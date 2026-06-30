@@ -10,6 +10,7 @@ Features:
 - Add/edit products from bot (/addproduct)
 """
 from flask import Flask
+import asyncio
 import threading
 import os
 import os
@@ -420,7 +421,10 @@ def main():
     app.add_handler(CallbackQueryHandler(admin_cb, pattern="^adm:"))
 
     print("✅ Comeback bot is running...")
-    app.run_polling()
+    app.run_polling(
+    allowed_updates=Update.ALL_TYPES,
+    close_loop=False
+)
 
 
 app = Flask(__name__)
@@ -430,6 +434,8 @@ def home():
     return "Telegram Bot is Running!"
 
 def run_bot():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     main()
 
 threading.Thread(target=run_bot, daemon=True).start()
