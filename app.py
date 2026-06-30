@@ -9,6 +9,9 @@ Features:
 - Stats (/stats)
 - Add/edit products from bot (/addproduct)
 """
+from flask import Flask
+import threading
+import os
 import os
 import logging
 import sqlite3
@@ -420,5 +423,17 @@ def main():
     app.run_polling()
 
 
-if __name__ == "__main__":
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Telegram Bot is Running!"
+
+def run_bot():
     main()
+
+threading.Thread(target=run_bot, daemon=True).start()
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
